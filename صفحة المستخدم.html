@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفحة المستخدم</title>
+  <style>
+    /* الأساسيات */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 200px;
+      background-color: #2c3e50;
+      color: white;
+      height: 100vh;
+      padding-top: 20px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+    }
+
+    .sidebar ul li a:hover {
+      background-color: #34495e;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    .navbar a {
+      color: #2c3e50;
+      text-decoration: none;
+      padding: 10px;
+      background-color: #ecf0f1;
+      border-radius: 5px;
+    }
+
+    .navbar a:hover {
+      background-color: #bdc3c7;
+    }
+
+    /* تصميم ملف المستخدم */
+    .user-profile {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .profile-header {
+      display: flex;
+      gap: 20px;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .user-info h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .user-info p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+
+    .profile-actions button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .profile-actions button:hover {
+      background-color: #2980b9;
+    }
+
+    .user-settings h3 {
+      font-size: 22px;
+      margin-top: 20px;
+    }
+
+    .user-settings ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .user-settings ul li {
+      margin: 10px 0;
+    }
+
+    .user-settings ul li a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .user-settings ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* تنسيق نموذج تغيير كلمة المرور */
+    #changePasswordForm, #editProfileForm {
+      background-color: #ecf0f1;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #changePasswordForm input, #editProfileForm input {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #changePasswordForm button, #editProfileForm button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #changePasswordForm button:hover, #editProfileForm button:hover {
+      background-color: #2980b9;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <ul>
+      <li><a href="#">الرئيسية</a></li>
+      <li><a href="#">المستخدمين</a></li>
+      <li><a href="#">الإعدادات</a></li>
+      <li><a href="#">التقارير</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <header>
+      <h1>معلومات المستخدم</h1>
+      <div class="navbar">
+        <a href="#">خروج</a>
+      </div>
+    </header>
+    
+    <section class="user-profile">
+      <div class="profile-header">
+        <!-- تعديل الصورة إلى صورة افتراضية في حال كانت الصورة غير موجودة -->
+        <img src="الصور/Screenshot 2024-11-07 192652.png" alt="صورة المستخدم" class="profile-image">
+        <div class="user-info">
+          <h2>أحمد محمد</h2>
+          <p><strong>البريد الإلكتروني:</strong> ahmed@example.com</p>
+          <p><strong>الوظيفة:</strong> مطور ويب</p>
+          <p><strong>المدينة:</strong> القاهرة</p>
+          <p><strong>رقم الهاتف:</strong> 01012345678</p>
+          <p><strong>رقم البطاقة:</strong> 12345678901234</p>
+        </div>
+      </div>
+      
+      <div class="profile-actions">
+        <button id="editProfileBtn">تعديل الملف الشخصي</button>
+        <button id="changePasswordBtn">تغيير كلمة المرور</button>
+      </div>
+      
+      <div class="user-settings">
+        <h3>الإعدادات</h3>
+        <ul>
+          <li><a href="#">تغيير الصورة الشخصية</a></li>
+          <li><a href="#">إعدادات الحساب</a></li>
+          <li><a href="#">إشعارات</a></li>
+        </ul>
+      </div>
+      
+      <!-- نموذج تغيير كلمة المرور -->
+      <div id="changePasswordForm" class="hidden">
+        <h3>تغيير كلمة المرور</h3>
+        <form id="passwordForm">
+          <label for="currentPassword">كلمة المرور الحالية:</label>
+          <input type="password" id="currentPassword" name="currentPassword" required><br><br>
+
+          <label for="newPassword">كلمة المرور الجديدة:</label>
+          <input type="password" id="newPassword" name="newPassword" required><br><br>
+
+          <label for="confirmPassword">تأكيد كلمة المرور الجديدة:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+
+          <button type="submit">تحديث كلمة المرور</button>
+        </form>
+      </div>
+
+      <!-- نموذج تعديل الملف الشخصي -->
+      <div id="editProfileForm" class="hidden">
+        <h3>تعديل الملف الشخصي</h3>
+        <form id="editProfile">
+          <label for="userName">الاسم:</label>
+          <input type="text" id="userName" name="userName" value="أحمد محمد" required><br><br>
+
+          <label for="userEmail">البريد الإلكتروني:</label>
+          <input type="email" id="userEmail" name="userEmail" value="ahmed@example.com" required><br><br>
+
+          <label for="userPhone">رقم الهاتف:</label>
+          <input type="text" id="userPhone" name="userPhone" value="01012345678" required><br><br>
+
+          <label for="userCardNumber">رقم البطاقة:</label>
+          <input type="text" id="userCardNumber" name="userCardNumber" value="12345678901234" required><br><br>
+
+          <label for="userImage">صورة المستخدم:</label>
+          <input type="file" id="userImage" name="userImage"><br><br>
+
+          <button type="submit">تحديث الملف الشخصي</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // إظهار نموذج تغيير كلمة المرور عند الضغط على الزر
+    document.getElementById('changePasswordBtn').addEventListener('click', function() {
+      document.getElementById('changePasswordForm').classList.remove('hidden');
+      document.getElementById('editProfileForm').classList.add('hidden'); // إخفاء نموذج تعديل الملف الشخصي
+    });
+
+    // إظهار نموذج تعديل الملف الشخصي عند الضغط على الزر
+    document.getElementById('editProfileBtn').addEventListener('click', function() {
+      document.getElementById('editProfileForm').classList.remove('hidden');
+      document.getElementById('changePasswordForm').classList.add('hidden'); // إخفاء نموذج تغيير كلمة المرور
+    });
+
+    // التحقق من تحديث الملف الشخصي وحفظ التعديلات
+    document.getElementById('editProfile').addEventListener('submit', function(event) {
+      event.preventDefault(); // منع إرسال النموذج بشكل افتراضي
+
+      const userName = document.getElementById('userName').value;
+      const userEmail = document.getElementById('userEmail').value;
+      const userPhone = document.getElementById('userPhone').value;
+      const userCardNumber = document.getElementById('userCardNumber').value;
+
+      alert('تم تحديث الملف الشخصي بنجاح!');
+      // هنا يمكن إضافة الكود لحفظ التعديلات في قاعدة البيانات
+    });
+
+    // التحقق من صحة كلمة المرور وتحديثها
+    document.getElementById('passwordForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // منع إرسال النموذج بشكل افتراضي
+
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // التحقق من تطابق كلمة المرور الجديدة مع تأكيد كلمة المرور
+      if (newPassword === confirmPassword) {
+        alert('تم تغيير كلمة المرور بنجاح!');
+        // هنا يمكن إضافة الكود لحفظ كلمة المرور الجديدة في قاعدة البيانات
+      } else {
+        alert('كلمة المرور الجديدة وتأكيد كلمة المرور غير متطابقتين.');
+      }
+    });
+  </script>
+</body>
+</html>
